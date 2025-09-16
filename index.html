@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeux de Mémoire - Collection Complète</title>
+    <title>Jeux de Mémoire - Collection Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -12,14 +12,75 @@
         .card-flip.flipped { transform: rotateY(180deg); }
         .card-front, .card-back { backface-visibility: hidden; position: absolute; width: 100%; height: 100%; }
         .card-back { transform: rotateY(180deg); }
+        .premium-glow { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+        .pulse-gold { animation: pulse-gold 2s infinite; }
+        @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); } 50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); } }
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen">
+    <!-- Header avec statut premium -->
     <header class="bg-black/20 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <h1 class="text-3xl font-bold text-white text-center">🧠 Jeux de Mémoire - Collection Complète</h1>
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-white">🧠 Jeux de Mémoire</h1>
+            <div id="premiumStatus" class="flex items-center gap-4">
+                <span id="statusText" class="text-green-400 font-semibold">Version Premium Débloquée 👑</span>
+                <button id="upgradeBtn" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-lg font-bold hover:from-yellow-300 hover:to-orange-400 transition-all pulse-gold">
+                    ⭐ PREMIUM 2$ ⭐
+                </button>
+            </div>
         </div>
     </header>
+
+    <!-- Modal Premium (pour affichage seulement) -->
+    <div id="premiumModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl p-8 max-w-lg w-full text-center relative">
+            <button id="closeModal" class="absolute top-4 right-4 text-black text-2xl font-bold hover:text-gray-700">×</button>
+            
+            <div class="text-6xl mb-4">👑</div>
+            <h2 class="text-3xl font-bold text-black mb-4">Version Premium</h2>
+            
+            <div class="bg-black/10 rounded-lg p-4 mb-6">
+                <h3 class="font-bold text-black mb-2">Débloquez TOUT :</h3>
+                <ul class="text-left text-black space-y-1">
+                    <li>✅ 8 jeux de mémoire complets</li>
+                    <li>✅ Mode Expert & Speed Challenge</li>
+                    <li>✅ Statistiques détaillées</li>
+                    <li>✅ Thèmes exclusifs</li>
+                    <li>✅ Aucune publicité</li>
+                    <li>✅ Mises à jour gratuites</li>
+                </ul>
+            </div>
+
+            <div class="text-4xl font-bold text-black mb-6">Seulement 2,00 $</div>
+            
+            <!-- Bouton PayPal -->
+            <div class="mb-6">
+                <button onclick="window.open('https://www.paypal.com', '_blank')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 rounded-lg font-bold text-lg w-full transition-colors shadow-lg mb-4">
+                    <div class="flex items-center justify-center gap-3 mb-2">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.408-.835c-.79-.98-2.26-1.417-4.597-1.417H9.84c-.524 0-.968.382-1.05.9L7.352 12.46c-.082.518.302.94.826.94h2.190c4.298 0 7.664-1.747 8.647-6.797.03-.149.054-.294.077-.437.201-1.284.107-2.334-.47-3.249z"/>
+                        </svg>
+                        <span>💰 Payer avec PayPal</span>
+                    </div>
+                    <div class="text-sm font-normal opacity-90">
+                        Envoyer 2,00 $ USD au compte :
+                    </div>
+                    <div class="text-base font-bold bg-white/20 rounded px-3 py-1 mt-1">
+                        mejdisghaier1970@gmail.com
+                    </div>
+                </button>
+                
+                <div class="bg-green-100 border-2 border-green-300 rounded-lg p-4 text-center">
+                    <div class="text-2xl mb-2">✅</div>
+                    <p class="text-green-800 font-semibold">Paiement 100% sécurisé via PayPal</p>
+                    <p class="text-green-700 text-sm">Redirection vers le site officiel PayPal</p>
+                </div>
+            </div>
+            
+            <p class="text-sm text-black/70 mb-4">🔒 Transaction sécurisée • Protection acheteur PayPal</p>
+            <p class="text-xs text-black/60">Aucun abonnement • Achat unique • Accès à vie</p>
+        </div>
+    </div>
 
     <div class="container mx-auto px-4 py-8">
         <div class="text-center mb-8">
@@ -28,7 +89,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <!-- Tous les jeux sont gratuits -->
+            <!-- Jeu Gratuit -->
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('easy')">
                 <div class="text-4xl mb-3">🐱</div>
                 <h3 class="text-xl font-bold text-white mb-2">Mode Facile</h3>
@@ -36,53 +97,54 @@
                 <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
             </div>
 
-            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('classic')">
+            <!-- Jeux Premium (mais accessibles) -->
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('classic')">
                 <div class="text-4xl mb-3">⚽</div>
                 <h3 class="text-xl font-bold text-white mb-2">Mode Classique</h3>
                 <p class="text-gray-300 text-sm mb-3">Sports & loisirs</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
             </div>
 
-            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('simon')">
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('simon')">
                 <div class="text-4xl mb-3">🎵</div>
                 <h3 class="text-xl font-bold text-white mb-2">Simon Says</h3>
                 <p class="text-gray-300 text-sm mb-3">Séquences musicales</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
             </div>
 
-            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('expert')">
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('expert')">
                 <div class="text-4xl mb-3">💎</div>
                 <h3 class="text-xl font-bold text-white mb-2">Mode Expert</h3>
                 <p class="text-gray-300 text-sm mb-3">Gemmes précieuses</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
             </div>
 
-            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('speed')">
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('speed')">
                 <div class="text-4xl mb-3">⚡</div>
                 <h3 class="text-xl font-bold text-white mb-2">Speed Challenge</h3>
                 <p class="text-gray-300 text-sm mb-3">Fruits & légumes</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
             </div>
 
-            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('mega')">
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('mega')">
                 <div class="text-4xl mb-3">🧠</div>
                 <h3 class="text-xl font-bold text-white mb-2">Mega Memory</h3>
                 <p class="text-gray-300 text-sm mb-3">Objets quotidiens</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
             </div>
 
-            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('nature')">
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('nature')">
                 <div class="text-4xl mb-3">🌿</div>
                 <h3 class="text-xl font-bold text-white mb-2">Nature Quest</h3>
                 <p class="text-gray-300 text-sm mb-3">Éléments naturels</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
             </div>
 
-            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('space')">
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('space')">
                 <div class="text-4xl mb-3">🚀</div>
                 <h3 class="text-xl font-bold text-white mb-2">Space Adventure</h3>
                 <p class="text-gray-300 text-sm mb-3">Cosmos infini</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
             </div>
         </div>
     </div>
@@ -118,47 +180,64 @@
         let startTime = 0;
         let timerInterval = null;
 
-        // Données des jeux
+        // Données des jeux avec mécaniques différentes
         const games = {
             easy: {
                 title: '🐱 Mode Facile - Animaux',
-                items: ['🐱', '🐶', '🐰', '🦊', '🐻', '🐼', '🐨', '🐸'],
-                gridSize: 4
+                type: 'memory',
+                items: ['🐱', '🐶', '🐰', '🦊', '🐻', '🐼'],
+                gridSize: 3,
+                pairs: 6
             },
             classic: {
                 title: '⚽ Mode Classique - Sports',
+                type: 'memory',
                 items: ['⚽', '🏀', '🎾', '🏈', '🏐', '🏓', '🎱', '🏸'],
-                gridSize: 4
+                gridSize: 4,
+                pairs: 8
             },
             simon: {
-                title: '🎵 Simon Says - Couleurs',
-                items: ['🔴', '🔵', '🟢', '🟡', '🟣', '🟠', '⚫', '⚪'],
-                gridSize: 4
+                title: '🎵 Simon Says - Séquences',
+                type: 'simon',
+                colors: ['🔴', '🔵', '🟢', '🟡'],
+                sequence: [],
+                playerSequence: [],
+                level: 1
             },
             expert: {
                 title: '💎 Mode Expert - Gemmes',
-                items: ['💎', '💍', '👑', '🏆', '⭐', '✨', '💫', '🌟'],
-                gridSize: 4
+                type: 'memory',
+                items: ['💎', '💍', '👑', '🏆', '⭐', '✨', '💫', '🌟', '🔮', '💰'],
+                gridSize: 4,
+                pairs: 10
             },
             speed: {
-                title: '⚡ Speed Challenge - Fruits',
-                items: ['🍎', '🍌', '🍊', '🍇', '🍓', '🥝', '🍑', '🍒'],
-                gridSize: 4
+                title: '⚡ Speed Challenge - Rapidité',
+                type: 'speed',
+                items: ['🍎', '🍌', '🍊', '🍇', '🍓', '🥝'],
+                target: '🍎',
+                timeLimit: 30
             },
             mega: {
-                title: '🧠 Mega Memory - Objets',
-                items: ['📱', '💻', '⌚', '🎧', '📷', '🖥️', '⌨️', '🖱️'],
-                gridSize: 4
+                title: '🧠 Mega Memory - Mémorisation',
+                type: 'sequence',
+                items: ['📱', '💻', '⌚', '🎧', '📷', '🖥️'],
+                sequence: [],
+                showTime: 3000
             },
             nature: {
-                title: '🌿 Nature Quest - Nature',
+                title: '🌿 Nature Quest - Observation',
+                type: 'find',
                 items: ['🌳', '🌸', '🌺', '🌻', '🌹', '🌷', '🌼', '🍀'],
-                gridSize: 4
+                target: '🌸',
+                distractors: ['🌳', '🌺', '🌻', '🌹', '🌷', '🌼', '🍀']
             },
             space: {
-                title: '🚀 Space Adventure - Cosmos',
-                items: ['🚀', '🛸', '🌍', '🌙', '⭐', '🪐', '☄️', '🌌'],
-                gridSize: 4
+                title: '🚀 Space Adventure - Navigation',
+                type: 'path',
+                items: ['🚀', '🛸', '🌍', '🌙', '⭐', '🪐'],
+                path: [],
+                playerPath: []
             }
         };
 
@@ -169,28 +248,48 @@
             document.getElementById('gameTitle').textContent = game.title;
             document.getElementById('gameArea').classList.remove('hidden');
             
-            // Créer les paires de cartes
-            gameData = [...game.items, ...game.items];
-            shuffleArray(gameData);
-            
-            // Réinitialiser les variables
+            // Réinitialiser les variables communes
             flippedCards = [];
             matchedPairs = 0;
             score = 0;
             startTime = Date.now();
             
-            // Créer le plateau de jeu
-            createGameBoard();
+            // Créer le jeu selon son type
+            switch(game.type) {
+                case 'memory':
+                    createMemoryGame(game);
+                    break;
+                case 'simon':
+                    createSimonGame(game);
+                    break;
+                case 'speed':
+                    createSpeedGame(game);
+                    break;
+                case 'sequence':
+                    createSequenceGame(game);
+                    break;
+                case 'find':
+                    createFindGame(game);
+                    break;
+                case 'path':
+                    createPathGame(game);
+                    break;
+            }
+            
             startTimer();
             
             // Scroll vers le jeu
             document.getElementById('gameArea').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function createGameBoard() {
+        // 1. JEU DE MÉMOIRE CLASSIQUE
+        function createMemoryGame(game) {
+            gameData = [...game.items, ...game.items];
+            shuffleArray(gameData);
+            
             const board = document.getElementById('gameBoard');
             board.innerHTML = '';
-            board.className = `grid gap-4 justify-center grid-cols-${games[currentGame].gridSize}`;
+            board.className = `grid gap-4 justify-center grid-cols-${game.gridSize}`;
             
             gameData.forEach((item, index) => {
                 const card = document.createElement('div');
@@ -206,6 +305,113 @@
                 card.addEventListener('click', () => flipCard(index, card));
                 board.appendChild(card);
             });
+        }
+
+        // 2. JEU SIMON SAYS
+        function createSimonGame(game) {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = `
+                <div class="text-center mb-6">
+                    <h4 class="text-xl text-white mb-4">Niveau: <span id="simonLevel">1</span></h4>
+                    <p class="text-gray-300">Mémorisez et répétez la séquence !</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
+                    ${game.colors.map((color, index) => `
+                        <button class="simon-btn w-24 h-24 text-6xl rounded-lg border-4 border-white/20 hover:scale-105 transition-transform" 
+                                data-color="${index}" onclick="simonClick(${index})">
+                            ${color}
+                        </button>
+                    `).join('')}
+                </div>
+                <div class="text-center mt-6">
+                    <button id="simonStart" onclick="startSimon()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold">
+                        Commencer
+                    </button>
+                </div>
+            `;
+            
+            games[currentGame].sequence = [];
+            games[currentGame].playerSequence = [];
+            games[currentGame].level = 1;
+        }
+
+        // 3. JEU DE RAPIDITÉ
+        function createSpeedGame(game) {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = `
+                <div class="text-center mb-6">
+                    <h4 class="text-xl text-white mb-2">Trouvez tous les: ${game.target}</h4>
+                    <p class="text-gray-300">Temps restant: <span id="speedTimer">${game.timeLimit}</span>s</p>
+                    <p class="text-yellow-400">Trouvés: <span id="speedFound">0</span></p>
+                </div>
+                <div id="speedGrid" class="grid grid-cols-6 gap-2 max-w-lg mx-auto">
+                </div>
+            `;
+            
+            generateSpeedItems(game);
+            startSpeedTimer(game.timeLimit);
+        }
+
+        // 4. JEU DE SÉQUENCE
+        function createSequenceGame(game) {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = `
+                <div class="text-center mb-6">
+                    <h4 class="text-xl text-white mb-4">Mémorisez la séquence !</h4>
+                    <p class="text-gray-300">Observez bien, puis reproduisez dans l'ordre</p>
+                </div>
+                <div id="sequenceDisplay" class="grid grid-cols-3 gap-4 max-w-md mx-auto mb-6">
+                    ${game.items.map((item, index) => `
+                        <div class="sequence-item w-20 h-20 bg-white/10 rounded-lg flex items-center justify-center text-4xl border-2 border-white/20" 
+                             data-index="${index}" onclick="sequenceClick(${index})">
+                            ${item}
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="text-center">
+                    <button id="sequenceStart" onclick="startSequence()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold">
+                        Voir la séquence
+                    </button>
+                </div>
+            `;
+        }
+
+        // 5. JEU DE RECHERCHE
+        function createFindGame(game) {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = `
+                <div class="text-center mb-6">
+                    <h4 class="text-xl text-white mb-4">Trouvez: ${game.target}</h4>
+                    <p class="text-gray-300">Cliquez sur tous les ${game.target} que vous voyez !</p>
+                </div>
+                <div id="findGrid" class="grid grid-cols-5 gap-3 max-w-lg mx-auto">
+                </div>
+            `;
+            
+            generateFindItems(game);
+        }
+
+        // 6. JEU DE CHEMIN
+        function createPathGame(game) {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = `
+                <div class="text-center mb-6">
+                    <h4 class="text-xl text-white mb-4">Suivez le chemin spatial !</h4>
+                    <p class="text-gray-300">Mémorisez le chemin, puis reproduisez-le</p>
+                </div>
+                <div id="pathGrid" class="grid grid-cols-4 gap-2 max-w-md mx-auto mb-6">
+                    ${Array(16).fill(0).map((_, index) => `
+                        <div class="path-cell w-16 h-16 bg-white/10 rounded-lg border-2 border-white/20 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors" 
+                             data-index="${index}" onclick="pathClick(${index})">
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="text-center">
+                    <button id="pathStart" onclick="startPath()" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-bold">
+                        Voir le chemin
+                    </button>
+                </div>
+            `;
         }
 
         function flipCard(index, cardElement) {
@@ -265,12 +471,333 @@
             selectGame(currentGame);
         }
 
+        // FONCTIONS SIMON SAYS
+        function startSimon() {
+            const game = games[currentGame];
+            game.sequence = [];
+            game.playerSequence = [];
+            game.level = 1;
+            addSimonStep();
+        }
+
+        function addSimonStep() {
+            const game = games[currentGame];
+            game.sequence.push(Math.floor(Math.random() * 4));
+            document.getElementById('simonLevel').textContent = game.level;
+            playSimonSequence();
+        }
+
+        function playSimonSequence() {
+            const game = games[currentGame];
+            let index = 0;
+            
+            const interval = setInterval(() => {
+                if (index < game.sequence.length) {
+                    highlightSimonButton(game.sequence[index]);
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    game.playerSequence = [];
+                }
+            }, 800);
+        }
+
+        function highlightSimonButton(colorIndex) {
+            const btn = document.querySelector(`[data-color="${colorIndex}"]`);
+            btn.style.transform = 'scale(1.2)';
+            btn.style.boxShadow = '0 0 20px rgba(255,255,255,0.8)';
+            
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+                btn.style.boxShadow = 'none';
+            }, 400);
+        }
+
+        function simonClick(colorIndex) {
+            const game = games[currentGame];
+            game.playerSequence.push(colorIndex);
+            highlightSimonButton(colorIndex);
+            
+            // Vérifier si correct
+            const currentIndex = game.playerSequence.length - 1;
+            if (game.playerSequence[currentIndex] !== game.sequence[currentIndex]) {
+                alert('❌ Erreur ! Recommencez.');
+                startSimon();
+                return;
+            }
+            
+            // Si séquence complète
+            if (game.playerSequence.length === game.sequence.length) {
+                score += game.level * 10;
+                document.getElementById('score').textContent = score;
+                game.level++;
+                
+                if (game.level > 10) {
+                    endGame();
+                } else {
+                    setTimeout(() => addSimonStep(), 1000);
+                }
+            }
+        }
+
+        // FONCTIONS SPEED GAME
+        function generateSpeedItems(game) {
+            const grid = document.getElementById('speedGrid');
+            const items = [];
+            
+            // Ajouter des cibles
+            for (let i = 0; i < 8; i++) {
+                items.push(game.target);
+            }
+            
+            // Ajouter des distracteurs
+            for (let i = 0; i < 28; i++) {
+                items.push(game.items[Math.floor(Math.random() * game.items.length)]);
+            }
+            
+            shuffleArray(items);
+            
+            grid.innerHTML = items.map((item, index) => `
+                <div class="speed-item w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-2xl cursor-pointer hover:bg-white/20 transition-colors border border-white/20" 
+                     onclick="speedClick('${item}', this)">
+                    ${item}
+                </div>
+            `).join('');
+        }
+
+        function speedClick(item, element) {
+            const game = games[currentGame];
+            if (item === game.target) {
+                element.style.background = 'rgba(34, 197, 94, 0.8)';
+                element.style.pointerEvents = 'none';
+                score += 5;
+                document.getElementById('score').textContent = score;
+                
+                const found = parseInt(document.getElementById('speedFound').textContent) + 1;
+                document.getElementById('speedFound').textContent = found;
+                
+                if (found >= 8) {
+                    endGame();
+                }
+            } else {
+                element.style.background = 'rgba(239, 68, 68, 0.8)';
+                score = Math.max(0, score - 2);
+                document.getElementById('score').textContent = score;
+            }
+        }
+
+        function startSpeedTimer(timeLimit) {
+            let timeLeft = timeLimit;
+            const timerElement = document.getElementById('speedTimer');
+            
+            const countdown = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    endGame();
+                }
+            }, 1000);
+        }
+
+        // FONCTIONS SEQUENCE GAME
+        function startSequence() {
+            const game = games[currentGame];
+            game.sequence = [];
+            
+            // Générer séquence aléatoire
+            for (let i = 0; i < 5; i++) {
+                game.sequence.push(Math.floor(Math.random() * game.items.length));
+            }
+            
+            showSequence();
+        }
+
+        function showSequence() {
+            const game = games[currentGame];
+            let index = 0;
+            
+            const interval = setInterval(() => {
+                // Réinitialiser tous les éléments
+                document.querySelectorAll('.sequence-item').forEach(item => {
+                    item.style.background = 'rgba(255,255,255,0.1)';
+                });
+                
+                if (index < game.sequence.length) {
+                    // Mettre en surbrillance l'élément actuel
+                    const element = document.querySelector(`[data-index="${game.sequence[index]}"]`);
+                    element.style.background = 'rgba(59, 130, 246, 0.8)';
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    // Réinitialiser pour la saisie du joueur
+                    document.querySelectorAll('.sequence-item').forEach(item => {
+                        item.style.background = 'rgba(255,255,255,0.1)';
+                    });
+                    game.playerSequence = [];
+                }
+            }, 1000);
+        }
+
+        function sequenceClick(index) {
+            const game = games[currentGame];
+            game.playerSequence.push(index);
+            
+            // Vérifier si correct
+            const currentIndex = game.playerSequence.length - 1;
+            if (game.playerSequence[currentIndex] !== game.sequence[currentIndex]) {
+                alert('❌ Erreur ! Recommencez.');
+                startSequence();
+                return;
+            }
+            
+            // Mettre en surbrillance
+            const element = document.querySelector(`[data-index="${index}"]`);
+            element.style.background = 'rgba(34, 197, 94, 0.8)';
+            
+            // Si séquence complète
+            if (game.playerSequence.length === game.sequence.length) {
+                score += 50;
+                document.getElementById('score').textContent = score;
+                endGame();
+            }
+        }
+
+        // FONCTIONS FIND GAME
+        function generateFindItems(game) {
+            const grid = document.getElementById('findGrid');
+            const items = [];
+            
+            // Ajouter des cibles
+            for (let i = 0; i < 6; i++) {
+                items.push(game.target);
+            }
+            
+            // Ajouter des distracteurs
+            for (let i = 0; i < 19; i++) {
+                items.push(game.distractors[Math.floor(Math.random() * game.distractors.length)]);
+            }
+            
+            shuffleArray(items);
+            
+            grid.innerHTML = items.map((item, index) => `
+                <div class="find-item w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center text-3xl cursor-pointer hover:bg-white/20 transition-colors border border-white/20" 
+                     onclick="findClick('${item}', this)">
+                    ${item}
+                </div>
+            `).join('');
+        }
+
+        function findClick(item, element) {
+            const game = games[currentGame];
+            if (item === game.target) {
+                element.style.background = 'rgba(34, 197, 94, 0.8)';
+                element.style.pointerEvents = 'none';
+                score += 10;
+                document.getElementById('score').textContent = score;
+                
+                // Vérifier si tous trouvés
+                const remaining = document.querySelectorAll('.find-item').length - document.querySelectorAll('[style*="34, 197, 94"]').length;
+                if (remaining <= 19) { // Il ne reste que les distracteurs
+                    endGame();
+                }
+            } else {
+                element.style.background = 'rgba(239, 68, 68, 0.8)';
+                score = Math.max(0, score - 5);
+                document.getElementById('score').textContent = score;
+            }
+        }
+
+        // FONCTIONS PATH GAME
+        function startPath() {
+            const game = games[currentGame];
+            game.path = [];
+            game.playerPath = [];
+            
+            // Générer chemin aléatoire
+            for (let i = 0; i < 6; i++) {
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * 16);
+                } while (game.path.includes(newIndex));
+                game.path.push(newIndex);
+            }
+            
+            showPath();
+        }
+
+        function showPath() {
+            const game = games[currentGame];
+            let index = 0;
+            
+            const interval = setInterval(() => {
+                // Réinitialiser toutes les cellules
+                document.querySelectorAll('.path-cell').forEach(cell => {
+                    cell.style.background = 'rgba(255,255,255,0.1)';
+                    cell.textContent = '';
+                });
+                
+                if (index < game.path.length) {
+                    // Mettre en surbrillance la cellule actuelle
+                    const cell = document.querySelector(`[data-index="${game.path[index]}"]`);
+                    cell.style.background = 'rgba(147, 51, 234, 0.8)';
+                    cell.textContent = '🚀';
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    // Réinitialiser pour la saisie du joueur
+                    document.querySelectorAll('.path-cell').forEach(cell => {
+                        cell.style.background = 'rgba(255,255,255,0.1)';
+                        cell.textContent = '';
+                    });
+                    game.playerPath = [];
+                }
+            }, 800);
+        }
+
+        function pathClick(index) {
+            const game = games[currentGame];
+            game.playerPath.push(index);
+            
+            // Vérifier si correct
+            const currentIndex = game.playerPath.length - 1;
+            if (game.playerPath[currentIndex] !== game.path[currentIndex]) {
+                alert('❌ Erreur ! Recommencez.');
+                startPath();
+                return;
+            }
+            
+            // Mettre en surbrillance
+            const cell = document.querySelector(`[data-index="${index}"]`);
+            cell.style.background = 'rgba(34, 197, 94, 0.8)';
+            cell.textContent = '✅';
+            
+            // Si chemin complet
+            if (game.playerPath.length === game.path.length) {
+                score += 75;
+                document.getElementById('score').textContent = score;
+                endGame();
+            }
+        }
+
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
+
+        // Event listeners
+        document.getElementById('upgradeBtn').addEventListener('click', () => {
+            document.getElementById('premiumModal').classList.remove('hidden');
+            document.getElementById('premiumModal').classList.add('flex');
+        });
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('premiumModal').classList.add('hidden');
+            document.getElementById('premiumModal').classList.remove('flex');
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ff3cd1f0f4e1a8',t:'MTc1ODAxMzg5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ff75eed340e28c',t:'MTc1ODAxNjIzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
