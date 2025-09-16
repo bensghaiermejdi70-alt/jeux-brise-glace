@@ -1,27 +1,276 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Jeu Brise-Glace</title>
-  <style>
-    body {
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 100px;
-    }
-    h1 {
-      color: #2c3e50;
-    }
-    p {
-      font-size: 18px;
-      color: #555;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeux de Mémoire - Collection Complète</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        body { font-family: 'Poppins', sans-serif; }
+        .card-flip { transform-style: preserve-3d; transition: transform 0.6s; }
+        .card-flip.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back { backface-visibility: hidden; position: absolute; width: 100%; height: 100%; }
+        .card-back { transform: rotateY(180deg); }
+    </style>
 </head>
-<body>
-  <h1>🎮 Bienvenue dans le jeu Brise-Glace !</h1>
-  <p>Ce site est hébergé avec GitHub Pages.</p>
-</body>
-</html>
+<body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen">
+    <header class="bg-black/20 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <h1 class="text-3xl font-bold text-white text-center">🧠 Jeux de Mémoire - Collection Complète</h1>
+        </div>
+    </header>
 
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h2 class="text-4xl font-bold text-white mb-4">Choisissez votre défi mémoire</h2>
+            <p class="text-xl text-gray-300">8 jeux uniques pour entraîner votre cerveau</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Tous les jeux sont gratuits -->
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('easy')">
+                <div class="text-4xl mb-3">🐱</div>
+                <h3 class="text-xl font-bold text-white mb-2">Mode Facile</h3>
+                <p class="text-gray-300 text-sm mb-3">Animaux mignons</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('classic')">
+                <div class="text-4xl mb-3">⚽</div>
+                <h3 class="text-xl font-bold text-white mb-2">Mode Classique</h3>
+                <p class="text-gray-300 text-sm mb-3">Sports & loisirs</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('simon')">
+                <div class="text-4xl mb-3">🎵</div>
+                <h3 class="text-xl font-bold text-white mb-2">Simon Says</h3>
+                <p class="text-gray-300 text-sm mb-3">Séquences musicales</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('expert')">
+                <div class="text-4xl mb-3">💎</div>
+                <h3 class="text-xl font-bold text-white mb-2">Mode Expert</h3>
+                <p class="text-gray-300 text-sm mb-3">Gemmes précieuses</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('speed')">
+                <div class="text-4xl mb-3">⚡</div>
+                <h3 class="text-xl font-bold text-white mb-2">Speed Challenge</h3>
+                <p class="text-gray-300 text-sm mb-3">Fruits & légumes</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('mega')">
+                <div class="text-4xl mb-3">🧠</div>
+                <h3 class="text-xl font-bold text-white mb-2">Mega Memory</h3>
+                <p class="text-gray-300 text-sm mb-3">Objets quotidiens</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('nature')">
+                <div class="text-4xl mb-3">🌿</div>
+                <h3 class="text-xl font-bold text-white mb-2">Nature Quest</h3>
+                <p class="text-gray-300 text-sm mb-3">Éléments naturels</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+
+            <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('space')">
+                <div class="text-4xl mb-3">🚀</div>
+                <h3 class="text-xl font-bold text-white mb-2">Space Adventure</h3>
+                <p class="text-gray-300 text-sm mb-3">Cosmos infini</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zone de jeu -->
+    <div id="gameArea" class="container mx-auto px-4 pb-8 hidden">
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="gameTitle" class="text-2xl font-bold text-white"></h3>
+                <div class="flex gap-4 items-center">
+                    <div class="text-white">Score: <span id="score" class="font-bold text-yellow-400">0</span></div>
+                    <div class="text-white">Temps: <span id="timer" class="font-bold text-blue-400">0s</span></div>
+                    <button onclick="resetGame()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors">Recommencer</button>
+                </div>
+            </div>
+            
+            <div id="gameBoard" class="grid gap-4 justify-center"></div>
+            
+            <div id="gameComplete" class="text-center mt-8 hidden">
+                <h3 class="text-3xl font-bold text-green-400 mb-4">🎉 Félicitations !</h3>
+                <p class="text-xl text-white mb-4">Vous avez terminé en <span id="finalTime"></span> avec un score de <span id="finalScore"></span> !</p>
+                <button onclick="selectGame(currentGame)" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition-colors">Rejouer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentGame = '';
+        let gameData = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let score = 0;
+        let startTime = 0;
+        let timerInterval = null;
+
+        // Données des jeux
+        const games = {
+            easy: {
+                title: '🐱 Mode Facile - Animaux',
+                items: ['🐱', '🐶', '🐰', '🦊', '🐻', '🐼', '🐨', '🐸'],
+                gridSize: 4
+            },
+            classic: {
+                title: '⚽ Mode Classique - Sports',
+                items: ['⚽', '🏀', '🎾', '🏈', '🏐', '🏓', '🎱', '🏸'],
+                gridSize: 4
+            },
+            simon: {
+                title: '🎵 Simon Says - Couleurs',
+                items: ['🔴', '🔵', '🟢', '🟡', '🟣', '🟠', '⚫', '⚪'],
+                gridSize: 4
+            },
+            expert: {
+                title: '💎 Mode Expert - Gemmes',
+                items: ['💎', '💍', '👑', '🏆', '⭐', '✨', '💫', '🌟'],
+                gridSize: 4
+            },
+            speed: {
+                title: '⚡ Speed Challenge - Fruits',
+                items: ['🍎', '🍌', '🍊', '🍇', '🍓', '🥝', '🍑', '🍒'],
+                gridSize: 4
+            },
+            mega: {
+                title: '🧠 Mega Memory - Objets',
+                items: ['📱', '💻', '⌚', '🎧', '📷', '🖥️', '⌨️', '🖱️'],
+                gridSize: 4
+            },
+            nature: {
+                title: '🌿 Nature Quest - Nature',
+                items: ['🌳', '🌸', '🌺', '🌻', '🌹', '🌷', '🌼', '🍀'],
+                gridSize: 4
+            },
+            space: {
+                title: '🚀 Space Adventure - Cosmos',
+                items: ['🚀', '🛸', '🌍', '🌙', '⭐', '🪐', '☄️', '🌌'],
+                gridSize: 4
+            }
+        };
+
+        function selectGame(gameType) {
+            currentGame = gameType;
+            const game = games[gameType];
+            
+            document.getElementById('gameTitle').textContent = game.title;
+            document.getElementById('gameArea').classList.remove('hidden');
+            
+            // Créer les paires de cartes
+            gameData = [...game.items, ...game.items];
+            shuffleArray(gameData);
+            
+            // Réinitialiser les variables
+            flippedCards = [];
+            matchedPairs = 0;
+            score = 0;
+            startTime = Date.now();
+            
+            // Créer le plateau de jeu
+            createGameBoard();
+            startTimer();
+            
+            // Scroll vers le jeu
+            document.getElementById('gameArea').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function createGameBoard() {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = '';
+            board.className = `grid gap-4 justify-center grid-cols-${games[currentGame].gridSize}`;
+            
+            gameData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card-flip w-20 h-20 cursor-pointer relative';
+                card.innerHTML = `
+                    <div class="card-front bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold border-2 border-white/20">
+                        ?
+                    </div>
+                    <div class="card-back bg-white rounded-lg flex items-center justify-center text-4xl border-2 border-gray-200">
+                        ${item}
+                    </div>
+                `;
+                card.addEventListener('click', () => flipCard(index, card));
+                board.appendChild(card);
+            });
+        }
+
+        function flipCard(index, cardElement) {
+            if (flippedCards.length >= 2 || flippedCards.includes(index) || cardElement.classList.contains('flipped')) {
+                return;
+            }
+            
+            cardElement.classList.add('flipped');
+            flippedCards.push(index);
+            
+            if (flippedCards.length === 2) {
+                setTimeout(checkMatch, 1000);
+            }
+        }
+
+        function checkMatch() {
+            const [first, second] = flippedCards;
+            const cards = document.querySelectorAll('.card-flip');
+            
+            if (gameData[first] === gameData[second]) {
+                // Match trouvé
+                matchedPairs++;
+                score += 10;
+                document.getElementById('score').textContent = score;
+                
+                if (matchedPairs === gameData.length / 2) {
+                    endGame();
+                }
+            } else {
+                // Pas de match
+                cards[first].classList.remove('flipped');
+                cards[second].classList.remove('flipped');
+            }
+            
+            flippedCards = [];
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById('timer').textContent = elapsed + 's';
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(timerInterval);
+            const finalTime = Math.floor((Date.now() - startTime) / 1000);
+            
+            document.getElementById('finalTime').textContent = finalTime + ' secondes';
+            document.getElementById('finalScore').textContent = score + ' points';
+            document.getElementById('gameComplete').classList.remove('hidden');
+        }
+
+        function resetGame() {
+            clearInterval(timerInterval);
+            document.getElementById('gameComplete').classList.add('hidden');
+            selectGame(currentGame);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ff3cd1f0f4e1a8',t:'MTc1ODAxMzg5OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
