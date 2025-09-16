@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,18 +15,55 @@
         .premium-glow { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
         .pulse-gold { animation: pulse-gold 2s infinite; }
         @keyframes pulse-gold { 0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); } 50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); } }
+        .language-btn.active { background: rgba(59, 130, 246, 0.6); box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); }
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen">
     <!-- Header avec statut premium -->
     <header class="bg-black/20 backdrop-blur-sm border-b border-white/10 sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-white">🧠 Jeux de Mémoire</h1>
-            <div id="premiumStatus" class="flex items-center gap-4">
-                <span id="statusText" class="text-green-400 font-semibold">Version Premium Débloquée 👑</span>
-                <button id="upgradeBtn" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-lg font-bold hover:from-yellow-300 hover:to-orange-400 transition-all pulse-gold">
-                    ⭐ PREMIUM 2$ ⭐
-                </button>
+            <h1 class="text-2xl font-bold text-white" data-translate="title">🧠 Jeux de Mémoire</h1>
+            <div class="flex items-center gap-4">
+                <!-- Sélecteur de langue -->
+                <div class="relative">
+                    <button id="languageToggle" onclick="toggleLanguageMenu()" class="flex items-center gap-2 bg-white/10 rounded-lg px-4 py-2 border border-white/20 hover:bg-white/20 transition-all">
+                        <span id="currentFlag" class="text-lg">🇫🇷</span>
+                        <span id="currentLang" class="text-sm font-medium text-white">Français</span>
+                        <svg class="w-4 h-4 text-white transition-transform" id="languageArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Menu déroulant -->
+                    <div id="languageMenu" class="absolute top-full right-0 mt-2 bg-black/80 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl z-50 min-w-[160px] hidden">
+                        <button onclick="selectLanguage('fr', '🇫🇷', 'Français')" class="language-option w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left border-b border-white/10">
+                            <span class="text-lg">🇫🇷</span>
+                            <span class="text-sm font-medium text-white">Français</span>
+                        </button>
+                        <button onclick="selectLanguage('en', '🇺🇸', 'English')" class="language-option w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left border-b border-white/10">
+                            <span class="text-lg">🇺🇸</span>
+                            <span class="text-sm font-medium text-white">English</span>
+                        </button>
+                        <button onclick="selectLanguage('es', '🇪🇸', 'Español')" class="language-option w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left border-b border-white/10">
+                            <span class="text-lg">🇪🇸</span>
+                            <span class="text-sm font-medium text-white">Español</span>
+                        </button>
+                        <button onclick="selectLanguage('ar', '🇸🇦', 'العربية')" class="language-option w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left border-b border-white/10">
+                            <span class="text-lg">🇸🇦</span>
+                            <span class="text-sm font-medium text-white">العربية</span>
+                        </button>
+                        <button onclick="selectLanguage('zh', '🇨🇳', '中文')" class="language-option w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left">
+                            <span class="text-lg">🇨🇳</span>
+                            <span class="text-sm font-medium text-white">中文</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="premiumStatus" class="flex items-center gap-4">
+                    <span id="statusText" class="text-green-400 font-semibold" data-translate="premium-status">Version Premium Débloquée 👑</span>
+                    <button id="upgradeBtn" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-lg font-bold hover:from-yellow-300 hover:to-orange-400 transition-all pulse-gold" data-translate="premium-btn">
+                        ⭐ PREMIUM 2$ ⭐
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -37,21 +74,21 @@
             <button id="closeModal" class="absolute top-4 right-4 text-black text-2xl font-bold hover:text-gray-700">×</button>
             
             <div class="text-6xl mb-4">👑</div>
-            <h2 class="text-3xl font-bold text-black mb-4">Version Premium</h2>
+            <h2 class="text-3xl font-bold text-black mb-4" data-translate="modal-title">Version Premium</h2>
             
             <div class="bg-black/10 rounded-lg p-4 mb-6">
-                <h3 class="font-bold text-black mb-2">Débloquez TOUT :</h3>
+                <h3 class="font-bold text-black mb-2" data-translate="modal-unlock">Débloquez TOUT :</h3>
                 <ul class="text-left text-black space-y-1">
-                    <li>✅ 8 jeux de mémoire complets</li>
-                    <li>✅ Mode Expert & Speed Challenge</li>
-                    <li>✅ Statistiques détaillées</li>
-                    <li>✅ Thèmes exclusifs</li>
-                    <li>✅ Aucune publicité</li>
-                    <li>✅ Mises à jour gratuites</li>
+                    <li data-translate="modal-feature1">✅ 8 jeux de mémoire complets</li>
+                    <li data-translate="modal-feature2">✅ Mode Expert & Speed Challenge</li>
+                    <li data-translate="modal-feature3">✅ Statistiques détaillées</li>
+                    <li data-translate="modal-feature4">✅ Thèmes exclusifs</li>
+                    <li data-translate="modal-feature5">✅ Aucune publicité</li>
+                    <li data-translate="modal-feature6">✅ Mises à jour gratuites</li>
                 </ul>
             </div>
 
-            <div class="text-4xl font-bold text-black mb-6">Seulement 2,00 $</div>
+            <div class="text-4xl font-bold text-black mb-6" data-translate="modal-price">Seulement 2,00 $</div>
             
             <!-- Bouton PayPal -->
             <div class="mb-6">
@@ -60,9 +97,9 @@
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.408-.835c-.79-.98-2.26-1.417-4.597-1.417H9.84c-.524 0-.968.382-1.05.9L7.352 12.46c-.082.518.302.94.826.94h2.190c4.298 0 7.664-1.747 8.647-6.797.03-.149.054-.294.077-.437.201-1.284.107-2.334-.47-3.249z"/>
                         </svg>
-                        <span>💰 Payer avec PayPal</span>
+                        <span data-translate="paypal-btn">💰 Payer avec PayPal</span>
                     </div>
-                    <div class="text-sm font-normal opacity-90">
+                    <div class="text-sm font-normal opacity-90" data-translate="paypal-send">
                         Envoyer 2,00 $ USD au compte :
                     </div>
                     <div class="text-base font-bold bg-white/20 rounded px-3 py-1 mt-1">
@@ -72,79 +109,79 @@
                 
                 <div class="bg-green-100 border-2 border-green-300 rounded-lg p-4 text-center">
                     <div class="text-2xl mb-2">✅</div>
-                    <p class="text-green-800 font-semibold">Paiement 100% sécurisé via PayPal</p>
-                    <p class="text-green-700 text-sm">Redirection vers le site officiel PayPal</p>
+                    <p class="text-green-800 font-semibold" data-translate="paypal-secure">Paiement 100% sécurisé via PayPal</p>
+                    <p class="text-green-700 text-sm" data-translate="paypal-redirect">Redirection vers le site officiel PayPal</p>
                 </div>
             </div>
             
-            <p class="text-sm text-black/70 mb-4">🔒 Transaction sécurisée • Protection acheteur PayPal</p>
-            <p class="text-xs text-black/60">Aucun abonnement • Achat unique • Accès à vie</p>
+            <p class="text-sm text-black/70 mb-4" data-translate="paypal-protection">🔒 Transaction sécurisée • Protection acheteur PayPal</p>
+            <p class="text-xs text-black/60" data-translate="paypal-lifetime">Aucun abonnement • Achat unique • Accès à vie</p>
         </div>
     </div>
 
     <div class="container mx-auto px-4 py-8">
         <div class="text-center mb-8">
-            <h2 class="text-4xl font-bold text-white mb-4">Choisissez votre défi mémoire</h2>
-            <p class="text-xl text-gray-300">8 jeux uniques pour entraîner votre cerveau</p>
+            <h2 class="text-4xl font-bold text-white mb-4" data-translate="main-title">Choisissez votre défi mémoire</h2>
+            <p class="text-xl text-gray-300" data-translate="main-subtitle">8 jeux uniques pour entraîner votre cerveau</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <!-- Jeu Gratuit -->
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-green-400" onclick="selectGame('easy')">
                 <div class="text-4xl mb-3">🐱</div>
-                <h3 class="text-xl font-bold text-white mb-2">Mode Facile</h3>
-                <p class="text-gray-300 text-sm mb-3">Animaux mignons</p>
-                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">GRATUIT</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game1-title">Mode Facile</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game1-desc">Animaux mignons</p>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold" data-translate="free">GRATUIT</span>
             </div>
 
             <!-- Jeux Premium (mais accessibles) -->
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('classic')">
                 <div class="text-4xl mb-3">⚽</div>
-                <h3 class="text-xl font-bold text-white mb-2">Mode Classique</h3>
-                <p class="text-gray-300 text-sm mb-3">Sports & loisirs</p>
-                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game2-title">Mode Classique</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game2-desc">Sports & loisirs</p>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold" data-translate="premium">👑 PREMIUM</span>
             </div>
 
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('simon')">
                 <div class="text-4xl mb-3">🎵</div>
-                <h3 class="text-xl font-bold text-white mb-2">Simon Says</h3>
-                <p class="text-gray-300 text-sm mb-3">Séquences musicales</p>
-                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game3-title">Simon Says</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game3-desc">Séquences musicales</p>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold" data-translate="premium">👑 PREMIUM</span>
             </div>
 
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('expert')">
                 <div class="text-4xl mb-3">💎</div>
-                <h3 class="text-xl font-bold text-white mb-2">Mode Expert</h3>
-                <p class="text-gray-300 text-sm mb-3">Gemmes précieuses</p>
-                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game4-title">Mode Expert</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game4-desc">Gemmes précieuses</p>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold" data-translate="premium">👑 PREMIUM</span>
             </div>
 
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('speed')">
                 <div class="text-4xl mb-3">⚡</div>
-                <h3 class="text-xl font-bold text-white mb-2">Speed Challenge</h3>
-                <p class="text-gray-300 text-sm mb-3">Fruits & légumes</p>
-                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game5-title">Speed Challenge</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game5-desc">Fruits & légumes</p>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold" data-translate="premium">👑 PREMIUM</span>
             </div>
 
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('mega')">
                 <div class="text-4xl mb-3">🧠</div>
-                <h3 class="text-xl font-bold text-white mb-2">Mega Memory</h3>
-                <p class="text-gray-300 text-sm mb-3">Objets quotidiens</p>
-                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game6-title">Mega Memory</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game6-desc">Objets quotidiens</p>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold" data-translate="premium">👑 PREMIUM</span>
             </div>
 
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('nature')">
                 <div class="text-4xl mb-3">🌿</div>
-                <h3 class="text-xl font-bold text-white mb-2">Nature Quest</h3>
-                <p class="text-gray-300 text-sm mb-3">Éléments naturels</p>
-                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game7-title">Nature Quest</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game7-desc">Éléments naturels</p>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold" data-translate="premium">👑 PREMIUM</span>
             </div>
 
             <div class="game-card bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all cursor-pointer border border-yellow-400 premium-glow" onclick="selectGame('space')">
                 <div class="text-4xl mb-3">🚀</div>
-                <h3 class="text-xl font-bold text-white mb-2">Space Adventure</h3>
-                <p class="text-gray-300 text-sm mb-3">Cosmos infini</p>
-                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold">👑 PREMIUM</span>
+                <h3 class="text-xl font-bold text-white mb-2" data-translate="game8-title">Space Adventure</h3>
+                <p class="text-gray-300 text-sm mb-3" data-translate="game8-desc">Cosmos infini</p>
+                <span class="bg-yellow-500 text-black px-3 py-1 rounded-full text-sm font-bold" data-translate="premium">👑 PREMIUM</span>
             </div>
         </div>
     </div>
@@ -155,18 +192,18 @@
             <div class="flex justify-between items-center mb-6">
                 <h3 id="gameTitle" class="text-2xl font-bold text-white"></h3>
                 <div class="flex gap-4 items-center">
-                    <div class="text-white">Score: <span id="score" class="font-bold text-yellow-400">0</span></div>
-                    <div class="text-white">Temps: <span id="timer" class="font-bold text-blue-400">0s</span></div>
-                    <button onclick="resetGame()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors">Recommencer</button>
+                    <div class="text-white"><span data-translate="score">Score</span>: <span id="score" class="font-bold text-yellow-400">0</span></div>
+                    <div class="text-white"><span data-translate="time">Temps</span>: <span id="timer" class="font-bold text-blue-400">0s</span></div>
+                    <button onclick="resetGame()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition-colors" data-translate="restart">Recommencer</button>
                 </div>
             </div>
             
             <div id="gameBoard" class="grid gap-4 justify-center"></div>
             
             <div id="gameComplete" class="text-center mt-8 hidden">
-                <h3 class="text-3xl font-bold text-green-400 mb-4">🎉 Félicitations !</h3>
-                <p class="text-xl text-white mb-4">Vous avez terminé en <span id="finalTime"></span> avec un score de <span id="finalScore"></span> !</p>
-                <button onclick="selectGame(currentGame)" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition-colors">Rejouer</button>
+                <h3 class="text-3xl font-bold text-green-400 mb-4" data-translate="congratulations">🎉 Félicitations !</h3>
+                <p class="text-xl text-white mb-4"><span data-translate="completed-in">Vous avez terminé en</span> <span id="finalTime"></span> <span data-translate="with-score">avec un score de</span> <span id="finalScore"></span> !</p>
+                <button onclick="selectGame(currentGame)" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition-colors" data-translate="play-again">Rejouer</button>
             </div>
         </div>
     </div>
@@ -310,10 +347,11 @@
         // 2. JEU SIMON SAYS
         function createSimonGame(game) {
             const board = document.getElementById('gameBoard');
+            const texts = getGameTexts();
             board.innerHTML = `
                 <div class="text-center mb-6">
-                    <h4 class="text-xl text-white mb-4">Niveau: <span id="simonLevel">1</span></h4>
-                    <p class="text-gray-300">Mémorisez et répétez la séquence !</p>
+                    <h4 class="text-xl text-white mb-4">${texts.level}: <span id="simonLevel">1</span></h4>
+                    <p class="text-gray-300">${texts.simonInstructions}</p>
                 </div>
                 <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
                     ${game.colors.map((color, index) => `
@@ -325,7 +363,7 @@
                 </div>
                 <div class="text-center mt-6">
                     <button id="simonStart" onclick="startSimon()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold">
-                        Commencer
+                        ${texts.start}
                     </button>
                 </div>
             `;
@@ -338,11 +376,12 @@
         // 3. JEU DE RAPIDITÉ
         function createSpeedGame(game) {
             const board = document.getElementById('gameBoard');
+            const texts = getGameTexts();
             board.innerHTML = `
                 <div class="text-center mb-6">
-                    <h4 class="text-xl text-white mb-2">Trouvez tous les: ${game.target}</h4>
-                    <p class="text-gray-300">Temps restant: <span id="speedTimer">${game.timeLimit}</span>s</p>
-                    <p class="text-yellow-400">Trouvés: <span id="speedFound">0</span></p>
+                    <h4 class="text-xl text-white mb-2">${texts.findAll}: ${game.target}</h4>
+                    <p class="text-gray-300">${texts.timeLeft}: <span id="speedTimer">${game.timeLimit}</span>s</p>
+                    <p class="text-yellow-400">${texts.found}: <span id="speedFound">0</span></p>
                 </div>
                 <div id="speedGrid" class="grid grid-cols-6 gap-2 max-w-lg mx-auto">
                 </div>
@@ -355,10 +394,11 @@
         // 4. JEU DE SÉQUENCE
         function createSequenceGame(game) {
             const board = document.getElementById('gameBoard');
+            const texts = getGameTexts();
             board.innerHTML = `
                 <div class="text-center mb-6">
-                    <h4 class="text-xl text-white mb-4">Mémorisez la séquence !</h4>
-                    <p class="text-gray-300">Observez bien, puis reproduisez dans l'ordre</p>
+                    <h4 class="text-xl text-white mb-4">${texts.memorizeSequence}</h4>
+                    <p class="text-gray-300">${texts.sequenceInstructions}</p>
                 </div>
                 <div id="sequenceDisplay" class="grid grid-cols-3 gap-4 max-w-md mx-auto mb-6">
                     ${game.items.map((item, index) => `
@@ -370,7 +410,7 @@
                 </div>
                 <div class="text-center">
                     <button id="sequenceStart" onclick="startSequence()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold">
-                        Voir la séquence
+                        ${texts.showSequence}
                     </button>
                 </div>
             `;
@@ -379,10 +419,11 @@
         // 5. JEU DE RECHERCHE
         function createFindGame(game) {
             const board = document.getElementById('gameBoard');
+            const texts = getGameTexts();
             board.innerHTML = `
                 <div class="text-center mb-6">
-                    <h4 class="text-xl text-white mb-4">Trouvez: ${game.target}</h4>
-                    <p class="text-gray-300">Cliquez sur tous les ${game.target} que vous voyez !</p>
+                    <h4 class="text-xl text-white mb-4">${texts.find}: ${game.target}</h4>
+                    <p class="text-gray-300">${texts.findInstructions.replace('{target}', game.target)}</p>
                 </div>
                 <div id="findGrid" class="grid grid-cols-5 gap-3 max-w-lg mx-auto">
                 </div>
@@ -394,10 +435,11 @@
         // 6. JEU DE CHEMIN
         function createPathGame(game) {
             const board = document.getElementById('gameBoard');
+            const texts = getGameTexts();
             board.innerHTML = `
                 <div class="text-center mb-6">
-                    <h4 class="text-xl text-white mb-4">Suivez le chemin spatial !</h4>
-                    <p class="text-gray-300">Mémorisez le chemin, puis reproduisez-le</p>
+                    <h4 class="text-xl text-white mb-4">${texts.followPath}</h4>
+                    <p class="text-gray-300">${texts.pathInstructions}</p>
                 </div>
                 <div id="pathGrid" class="grid grid-cols-4 gap-2 max-w-md mx-auto mb-6">
                     ${Array(16).fill(0).map((_, index) => `
@@ -408,7 +450,7 @@
                 </div>
                 <div class="text-center">
                     <button id="pathStart" onclick="startPath()" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg font-bold">
-                        Voir le chemin
+                        ${texts.showPath}
                     </button>
                 </div>
             `;
@@ -521,7 +563,8 @@
             // Vérifier si correct
             const currentIndex = game.playerSequence.length - 1;
             if (game.playerSequence[currentIndex] !== game.sequence[currentIndex]) {
-                alert('❌ Erreur ! Recommencez.');
+                const texts = getGameTexts();
+                alert(texts.error);
                 startSimon();
                 return;
             }
@@ -647,7 +690,8 @@
             // Vérifier si correct
             const currentIndex = game.playerSequence.length - 1;
             if (game.playerSequence[currentIndex] !== game.sequence[currentIndex]) {
-                alert('❌ Erreur ! Recommencez.');
+                const texts = getGameTexts();
+                alert(texts.error);
                 startSequence();
                 return;
             }
@@ -763,7 +807,8 @@
             // Vérifier si correct
             const currentIndex = game.playerPath.length - 1;
             if (game.playerPath[currentIndex] !== game.path[currentIndex]) {
-                alert('❌ Erreur ! Recommencez.');
+                const texts = getGameTexts();
+                alert(texts.error);
                 startPath();
                 return;
             }
@@ -788,7 +833,471 @@
             }
         }
 
-        // Event listeners
+        // Fonction pour obtenir les textes des jeux selon la langue
+        function getGameTexts() {
+            const gameTexts = {
+                fr: {
+                    level: 'Niveau',
+                    simonInstructions: 'Mémorisez et répétez la séquence !',
+                    start: 'Commencer',
+                    findAll: 'Trouvez tous les',
+                    timeLeft: 'Temps restant',
+                    found: 'Trouvés',
+                    memorizeSequence: 'Mémorisez la séquence !',
+                    sequenceInstructions: 'Observez bien, puis reproduisez dans l\'ordre',
+                    showSequence: 'Voir la séquence',
+                    find: 'Trouvez',
+                    findInstructions: 'Cliquez sur tous les {target} que vous voyez !',
+                    followPath: 'Suivez le chemin spatial !',
+                    pathInstructions: 'Mémorisez le chemin, puis reproduisez-le',
+                    showPath: 'Voir le chemin',
+                    error: '❌ Erreur ! Recommencez.'
+                },
+                en: {
+                    level: 'Level',
+                    simonInstructions: 'Memorize and repeat the sequence!',
+                    start: 'Start',
+                    findAll: 'Find all',
+                    timeLeft: 'Time left',
+                    found: 'Found',
+                    memorizeSequence: 'Memorize the sequence!',
+                    sequenceInstructions: 'Watch carefully, then reproduce in order',
+                    showSequence: 'Show sequence',
+                    find: 'Find',
+                    findInstructions: 'Click on all {target} you see!',
+                    followPath: 'Follow the space path!',
+                    pathInstructions: 'Memorize the path, then reproduce it',
+                    showPath: 'Show path',
+                    error: '❌ Error! Try again.'
+                },
+                es: {
+                    level: 'Nivel',
+                    simonInstructions: '¡Memoriza y repite la secuencia!',
+                    start: 'Comenzar',
+                    findAll: 'Encuentra todos los',
+                    timeLeft: 'Tiempo restante',
+                    found: 'Encontrados',
+                    memorizeSequence: '¡Memoriza la secuencia!',
+                    sequenceInstructions: 'Observa bien, luego reproduce en orden',
+                    showSequence: 'Ver secuencia',
+                    find: 'Encuentra',
+                    findInstructions: '¡Haz clic en todos los {target} que veas!',
+                    followPath: '¡Sigue el camino espacial!',
+                    pathInstructions: 'Memoriza el camino, luego reprodúcelo',
+                    showPath: 'Ver camino',
+                    error: '❌ ¡Error! Inténtalo de nuevo.'
+                },
+                ar: {
+                    level: 'المستوى',
+                    simonInstructions: 'احفظ وكرر التسلسل!',
+                    start: 'ابدأ',
+                    findAll: 'اعثر على جميع',
+                    timeLeft: 'الوقت المتبقي',
+                    found: 'تم العثور عليها',
+                    memorizeSequence: 'احفظ التسلسل!',
+                    sequenceInstructions: 'راقب بعناية، ثم كرر بالترتيب',
+                    showSequence: 'عرض التسلسل',
+                    find: 'اعثر على',
+                    findInstructions: 'انقر على جميع {target} التي تراها!',
+                    followPath: 'اتبع المسار الفضائي!',
+                    pathInstructions: 'احفظ المسار، ثم كرره',
+                    showPath: 'عرض المسار',
+                    error: '❌ خطأ! حاول مرة أخرى.'
+                }
+            };
+            
+            return gameTexts[currentLanguage] || gameTexts.en;
+        }
+
+        // Système de traduction
+        const translations = {
+            fr: {
+                'title': '🧠 Jeux de Mémoire',
+                'premium-status': 'Version Premium Débloquée 👑',
+                'premium-btn': '⭐ PREMIUM 2$ ⭐',
+                'modal-title': 'Version Premium',
+                'modal-unlock': 'Débloquez TOUT :',
+                'modal-feature1': '✅ 8 jeux de mémoire complets',
+                'modal-feature2': '✅ Mode Expert & Défi Rapidité',
+                'modal-feature3': '✅ Statistiques détaillées',
+                'modal-feature4': '✅ Thèmes exclusifs',
+                'modal-feature5': '✅ Aucune publicité',
+                'modal-feature6': '✅ Mises à jour gratuites',
+                'modal-price': 'Seulement 2,00 $',
+                'paypal-btn': '💰 Payer avec PayPal',
+                'paypal-send': 'Envoyer 2,00 $ USD au compte :',
+                'paypal-secure': 'Paiement 100% sécurisé via PayPal',
+                'paypal-redirect': 'Redirection vers le site officiel PayPal',
+                'paypal-protection': '🔒 Transaction sécurisée • Protection acheteur PayPal',
+                'paypal-lifetime': 'Aucun abonnement • Achat unique • Accès à vie',
+                'main-title': 'Choisissez votre défi mémoire',
+                'main-subtitle': '8 jeux uniques pour entraîner votre cerveau',
+                'game1-title': 'Mode Facile',
+                'game1-desc': 'Animaux mignons',
+                'game2-title': 'Mode Classique',
+                'game2-desc': 'Sports & loisirs',
+                'game3-title': 'Simon Says',
+                'game3-desc': 'Séquences musicales',
+                'game4-title': 'Mode Expert',
+                'game4-desc': 'Gemmes précieuses',
+                'game5-title': 'Speed Challenge',
+                'game5-desc': 'Fruits & légumes',
+                'game6-title': 'Mega Memory',
+                'game6-desc': 'Objets quotidiens',
+                'game7-title': 'Nature Quest',
+                'game7-desc': 'Éléments naturels',
+                'game8-title': 'Space Adventure',
+                'game8-desc': 'Cosmos infini',
+                'free': 'GRATUIT',
+                'premium': '👑 PREMIUM',
+                'score': 'Score',
+                'time': 'Temps',
+                'restart': 'Recommencer',
+                'congratulations': '🎉 Félicitations !',
+                'completed-in': 'Vous avez terminé en',
+                'with-score': 'avec un score de',
+                'play-again': 'Rejouer'
+            },
+            en: {
+                'title': '🧠 Memory Games',
+                'premium-status': 'Premium Version Unlocked 👑',
+                'premium-btn': '⭐ PREMIUM $2 ⭐',
+                'modal-title': 'Premium Version',
+                'modal-unlock': 'Unlock EVERYTHING:',
+                'modal-feature1': '✅ 8 complete memory games',
+                'modal-feature2': '✅ Expert Mode & Speed Challenge',
+                'modal-feature3': '✅ Detailed statistics',
+                'modal-feature4': '✅ Exclusive themes',
+                'modal-feature5': '✅ No advertisements',
+                'modal-feature6': '✅ Free updates',
+                'modal-price': 'Only $2.00',
+                'paypal-btn': '💰 Pay with PayPal',
+                'paypal-send': 'Send $2.00 USD to account:',
+                'paypal-secure': '100% secure payment via PayPal',
+                'paypal-redirect': 'Redirect to official PayPal website',
+                'paypal-protection': '🔒 Secure transaction • PayPal buyer protection',
+                'paypal-lifetime': 'No subscription • One-time purchase • Lifetime access',
+                'main-title': 'Choose your memory challenge',
+                'main-subtitle': '8 unique games to train your brain',
+                'game1-title': 'Memory Easy',
+                'game1-desc': 'Adorable animals',
+                'game2-title': 'Memory Classic',
+                'game2-desc': 'Various sports',
+                'game3-title': 'Memory Simon',
+                'game3-desc': 'Color sequences',
+                'game4-title': 'Memory Expert',
+                'game4-desc': 'Precious stones',
+                'game5-title': 'Memory Speed',
+                'game5-desc': 'Colorful fruits',
+                'game6-title': 'Memory Mega',
+                'game6-desc': 'Daily objects',
+                'game7-title': 'Memory Nature',
+                'game7-desc': 'Flowers & plants',
+                'game8-title': 'Memory Space',
+                'game8-desc': 'Cosmic exploration',
+                'free': 'FREE',
+                'premium': '👑 PREMIUM',
+                'score': 'Score',
+                'time': 'Time',
+                'restart': 'Restart',
+                'congratulations': '🎉 Congratulations!',
+                'completed-in': 'You completed in',
+                'with-score': 'with a score of',
+                'play-again': 'Play Again'
+            },
+            es: {
+                'title': '🧠 Juegos de Memoria',
+                'premium-status': 'Versión Premium Desbloqueada 👑',
+                'premium-btn': '⭐ PREMIUM 2$ ⭐',
+                'modal-title': 'Versión Premium',
+                'modal-unlock': 'Desbloquea TODO:',
+                'modal-feature1': '✅ 8 juegos de memoria completos',
+                'modal-feature2': '✅ Modo Experto y Desafío de Velocidad',
+                'modal-feature3': '✅ Estadísticas detalladas',
+                'modal-feature4': '✅ Temas exclusivos',
+                'modal-feature5': '✅ Sin publicidad',
+                'modal-feature6': '✅ Actualizaciones gratuitas',
+                'modal-price': 'Solo $2.00',
+                'paypal-btn': '💰 Pagar con PayPal',
+                'paypal-send': 'Enviar $2.00 USD a la cuenta:',
+                'paypal-secure': 'Pago 100% seguro vía PayPal',
+                'paypal-redirect': 'Redirección al sitio oficial de PayPal',
+                'paypal-protection': '🔒 Transacción segura • Protección del comprador PayPal',
+                'paypal-lifetime': 'Sin suscripción • Compra única • Acceso de por vida',
+                'main-title': 'Elige tu desafío de memoria',
+                'main-subtitle': '8 juegos únicos para entrenar tu cerebro',
+                'game1-title': 'Memory Fácil',
+                'game1-desc': 'Animales tiernos',
+                'game2-title': 'Memory Clásico',
+                'game2-desc': 'Deportes y ocio',
+                'game3-title': 'Memory Simon',
+                'game3-desc': 'Secuencias musicales',
+                'game4-title': 'Memory Experto',
+                'game4-desc': 'Gemas preciosas',
+                'game5-title': 'Memory Velocidad',
+                'game5-desc': 'Frutas y verduras',
+                'game6-title': 'Memory Mega',
+                'game6-desc': 'Objetos cotidianos',
+                'game7-title': 'Memory Naturaleza',
+                'game7-desc': 'Elementos naturales',
+                'game8-title': 'Memory Espacial',
+                'game8-desc': 'Cosmos infinito',
+                'free': 'GRATIS',
+                'premium': '👑 PREMIUM',
+                'score': 'Puntuación',
+                'time': 'Tiempo',
+                'restart': 'Reiniciar',
+                'congratulations': '🎉 ¡Felicitaciones!',
+                'completed-in': 'Completaste en',
+                'with-score': 'con una puntuación de',
+                'play-again': 'Jugar de Nuevo'
+            },
+            ar: {
+                'title': '🧠 ألعاب الذاكرة',
+                'premium-status': 'النسخة المميزة مفعلة 👑',
+                'premium-btn': '⭐ مميز 2$ ⭐',
+                'modal-title': 'النسخة المميزة',
+                'modal-unlock': 'افتح كل شيء:',
+                'modal-feature1': '✅ 8 ألعاب ذاكرة كاملة',
+                'modal-feature2': '✅ المستوى الخبير وتحدي السرعة',
+                'modal-feature3': '✅ إحصائيات مفصلة',
+                'modal-feature4': '✅ مواضيع حصرية',
+                'modal-feature5': '✅ بدون إعلانات',
+                'modal-feature6': '✅ تحديثات مجانية',
+                'modal-price': 'فقط 2.00 دولار',
+                'paypal-btn': '💰 ادفع بـ PayPal',
+                'paypal-send': 'أرسل 2.00 دولار أمريكي للحساب:',
+                'paypal-secure': 'دفع آمن 100% عبر PayPal',
+                'paypal-redirect': 'إعادة توجيه لموقع PayPal الرسمي',
+                'paypal-protection': '🔒 معاملة آمنة • حماية المشتري PayPal',
+                'paypal-lifetime': 'بدون اشتراك • شراء لمرة واحدة • وصول مدى الحياة',
+                'main-title': 'اختر تحدي الذاكرة',
+                'main-subtitle': '8 ألعاب فريدة لتدريب عقلك',
+                'game1-title': 'المستوى السهل',
+                'game1-desc': 'حيوانات لطيفة',
+                'game2-title': 'الوضع الكلاسيكي',
+                'game2-desc': 'رياضة وترفيه',
+                'game3-title': 'سيمون يقول',
+                'game3-desc': 'تسلسل موسيقي',
+                'game4-title': 'الوضع الخبير',
+                'game4-desc': 'جواهر ثمينة',
+                'game5-title': 'تحدي السرعة',
+                'game5-desc': 'فواكه وخضروات',
+                'game6-title': 'الذاكرة الفائقة',
+                'game6-desc': 'أشياء يومية',
+                'game7-title': 'مهمة الطبيعة',
+                'game7-desc': 'عناصر طبيعية',
+                'game8-title': 'مغامرة الفضاء',
+                'game8-desc': 'كون لا نهائي',
+                'free': 'مجاني',
+                'premium': '👑 مميز',
+                'score': 'النقاط',
+                'time': 'الوقت',
+                'restart': 'إعادة البدء',
+                'congratulations': '🎉 تهانينا!',
+                'completed-in': 'لقد أنهيت في',
+                'with-score': 'بنقاط',
+                'play-again': 'العب مرة أخرى'
+            },
+            zh: {
+                'title': '🧠 记忆游戏',
+                'premium-status': '高级版已解锁 👑',
+                'premium-btn': '⭐ 高级版 2$ ⭐',
+                'modal-title': '高级版',
+                'modal-unlock': '解锁所有内容：',
+                'modal-feature1': '✅ 8个完整记忆游戏',
+                'modal-feature2': '✅ 专家模式和速度挑战',
+                'modal-feature3': '✅ 详细统计',
+                'modal-feature4': '✅ 独家主题',
+                'modal-feature5': '✅ 无广告',
+                'modal-feature6': '✅ 免费更新',
+                'modal-price': '仅需 $2.00',
+                'paypal-btn': '💰 使用 PayPal 支付',
+                'paypal-send': '发送 $2.00 美元到账户：',
+                'paypal-secure': '通过 PayPal 100% 安全支付',
+                'paypal-redirect': '重定向到 PayPal 官方网站',
+                'paypal-protection': '🔒 安全交易 • PayPal 买家保护',
+                'paypal-lifetime': '无订阅 • 一次性购买 • 终身访问',
+                'main-title': '选择你的记忆挑战',
+                'main-subtitle': '8个独特游戏训练你的大脑',
+                'game1-title': '记忆简单',
+                'game1-desc': '可爱动物',
+                'game2-title': '记忆经典',
+                'game2-desc': '运动休闲',
+                'game3-title': '记忆西蒙',
+                'game3-desc': '音乐序列',
+                'game4-title': '记忆专家',
+                'game4-desc': '珍贵宝石',
+                'game5-title': '记忆速度',
+                'game5-desc': '水果蔬菜',
+                'game6-title': '记忆超级',
+                'game6-desc': '日常物品',
+                'game7-title': '记忆自然',
+                'game7-desc': '自然元素',
+                'game8-title': '记忆太空',
+                'game8-desc': '无限宇宙',
+                'free': '免费',
+                'premium': '👑 高级版',
+                'score': '分数',
+                'time': '时间',
+                'restart': '重新开始',
+                'congratulations': '🎉 恭喜！',
+                'completed-in': '你在',
+                'with-score': '完成，得分',
+                'play-again': '再玩一次'
+            }
+        };
+
+        let currentLanguage = 'fr';
+
+        function translatePage(lang) {
+            currentLanguage = lang;
+            const elements = document.querySelectorAll('[data-translate]');
+            
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Mettre à jour les titres des jeux dans les données
+            updateGameTitles(lang);
+            
+            // Appliquer la direction RTL pour l'arabe
+            if (lang === 'ar') {
+                document.body.style.direction = 'rtl';
+                document.body.style.textAlign = 'right';
+            } else {
+                document.body.style.direction = 'ltr';
+                document.body.style.textAlign = 'left';
+            }
+            
+            // Sauvegarder la langue choisie
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        function updateGameTitles(lang) {
+            const gameTitles = {
+                fr: {
+                    easy: '🐱 Memory Facile - Animaux',
+                    classic: '⚽ Memory Classic - Sports',
+                    simon: '🎵 Memory Simon - Séquences',
+                    expert: '💎 Memory Expert - Gemmes',
+                    speed: '⚡ Memory Speed - Fruits',
+                    mega: '🧠 Memory Mega - Objets',
+                    nature: '🌿 Memory Nature - Éléments',
+                    space: '🚀 Memory Space - Cosmos'
+                },
+                en: {
+                    easy: '🐱 Memory Easy - Animals',
+                    classic: '⚽ Memory Classic - Sports',
+                    simon: '🎵 Memory Simon - Sequences',
+                    expert: '💎 Memory Expert - Gems',
+                    speed: '⚡ Memory Speed - Fruits',
+                    mega: '🧠 Memory Mega - Objects',
+                    nature: '🌿 Memory Nature - Elements',
+                    space: '🚀 Memory Space - Cosmos'
+                },
+                es: {
+                    easy: '🐱 Memory Fácil - Animales',
+                    classic: '⚽ Memory Clásico - Deportes',
+                    simon: '🎵 Memory Simon - Secuencias',
+                    expert: '💎 Memory Experto - Gemas',
+                    speed: '⚡ Memory Velocidad - Frutas',
+                    mega: '🧠 Memory Mega - Objetos',
+                    nature: '🌿 Memory Naturaleza - Elementos',
+                    space: '🚀 Memory Espacial - Cosmos'
+                },
+                ar: {
+                    easy: '🐱 ذاكرة سهلة - حيوانات',
+                    classic: '⚽ ذاكرة كلاسيكية - رياضة',
+                    simon: '🎵 ذاكرة سيمون - تسلسل',
+                    expert: '💎 ذاكرة خبير - جواهر',
+                    speed: '⚡ ذاكرة سريعة - فواكه',
+                    mega: '🧠 ذاكرة فائقة - أشياء',
+                    nature: '🌿 ذاكرة الطبيعة - عناصر',
+                    space: '🚀 ذاكرة الفضاء - كون'
+                },
+                zh: {
+                    easy: '🐱 简单记忆 - 动物',
+                    classic: '⚽ 经典记忆 - 运动',
+                    simon: '🎵 西蒙记忆 - 序列',
+                    expert: '💎 专家记忆 - 宝石',
+                    speed: '⚡ 速度记忆 - 水果',
+                    mega: '🧠 超级记忆 - 物品',
+                    nature: '🌿 自然记忆 - 元素',
+                    space: '🚀 太空记忆 - 宇宙'
+                }
+            };
+
+            Object.keys(games).forEach(gameKey => {
+                if (gameTitles[lang] && gameTitles[lang][gameKey]) {
+                    games[gameKey].title = gameTitles[lang][gameKey];
+                }
+            });
+        }
+
+        // Charger la langue sauvegardée au démarrage
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'fr';
+            
+            // Définir les informations de langue
+            const languageInfo = {
+                'fr': { flag: '🇫🇷', name: 'Français' },
+                'en': { flag: '🇺🇸', name: 'English' },
+                'es': { flag: '🇪🇸', name: 'Español' },
+                'ar': { flag: '🇸🇦', name: 'العربية' },
+                'zh': { flag: '🇨🇳', name: '中文' }
+            };
+            
+            const info = languageInfo[savedLanguage];
+            if (info) {
+                document.getElementById('currentFlag').textContent = info.flag;
+                document.getElementById('currentLang').textContent = info.name;
+            }
+            
+            translatePage(savedLanguage);
+        });
+
+        // Fonctions pour le menu déroulant de langue
+        function toggleLanguageMenu() {
+            const menu = document.getElementById('languageMenu');
+            const arrow = document.getElementById('languageArrow');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                menu.classList.add('hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function selectLanguage(lang, flag, name) {
+            // Mettre à jour l'affichage du bouton principal
+            document.getElementById('currentFlag').textContent = flag;
+            document.getElementById('currentLang').textContent = name;
+            
+            // Changer la langue de la page
+            translatePage(lang);
+            
+            // Fermer le menu
+            document.getElementById('languageMenu').classList.add('hidden');
+            document.getElementById('languageArrow').style.transform = 'rotate(0deg)';
+        }
+
+        // Fermer le menu si on clique ailleurs
+        document.addEventListener('click', function(event) {
+            const languageToggle = document.getElementById('languageToggle');
+            const languageMenu = document.getElementById('languageMenu');
+            
+            if (!languageToggle.contains(event.target) && !languageMenu.contains(event.target)) {
+                languageMenu.classList.add('hidden');
+                document.getElementById('languageArrow').style.transform = 'rotate(0deg)';
+            }
+        });
+
         document.getElementById('upgradeBtn').addEventListener('click', () => {
             document.getElementById('premiumModal').classList.remove('hidden');
             document.getElementById('premiumModal').classList.add('flex');
@@ -799,5 +1308,6 @@
             document.getElementById('premiumModal').classList.remove('flex');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97ff75eed340e28c',t:'MTc1ODAxNjIzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98009c4d054c48ba',t:'MTc1ODAyODI5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
