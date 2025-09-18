@@ -222,6 +222,73 @@
 </head>
 <body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen">
 <h1>🧠 Bibliothèque de Jeux de Mémoire</h1>
+<h1>🧠 Bibliothèque de Jeux de Mémoire</h1>
+
+<!-- 🔓 Bouton Stripe Premium -->
+<a href="https://buy.stripe.com/9B6aEZgf863kcwKfKg9EI00" target="_blank">
+  <button style="padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;">
+    🔓 Débloquer Premium – 10 $US/an
+  </button>
+</a>
+
+<!-- 🧠 Grille des jeux -->
+<div class="game-grid">
+  <!-- Jeu gratuit -->
+  <div class="game-card">
+    <h3>🐱 Mode Facile</h3>
+    <p>Animaux mignons</p>
+    <button onclick="location.href='easy.html'">Jouer</button>
+  </div>
+
+  <!-- Jeux Premium verrouillés -->
+  <div class="game-card premium">
+    <h3>⚽ Mode Classique</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Sports & loisirs</p>
+    <button class="locked" disabled data-link="classic.html">Premium</button>
+  </div>
+
+  <div class="game-card premium">
+    <h3>🎵 Simon Says</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Séquences musicales</p>
+    <button class="locked" disabled data-link="simon.html">Premium</button>
+  </div>
+
+  <div class="game-card premium">
+    <h3>💎 Mode Expert</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Gemmes précieuses</p>
+    <button class="locked" disabled data-link="expert.html">Premium</button>
+  </div>
+
+  <div class="game-card premium">
+    <h3>⚡ Speed Challenge</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Défi de rapidité</p>
+    <button class="locked" disabled data-link="speed.html">Premium</button>
+  </div>
+
+  <div class="game-card premium">
+    <h3>🧠 Mega Memory</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Mémorisation avancée</p>
+    <button class="locked" disabled data-link="mega.html">Premium</button>
+  </div>
+
+  <div class="game-card premium">
+    <h3>🌿 Nature Quest</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Observation de la nature</p>
+    <button class="locked" disabled data-link="nature.html">Premium</button>
+  </div>
+
+  <div class="game-card premium">
+    <h3>🚀 Space Adventure</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Navigation spatiale</p>
+    <button class="locked" disabled data-link="space.html">Premium</button>
+  </div>
+
+  <div class="game-card premium">
+    <h3>👾 Pac-Man Cognitif</h3>
+    <p><span style="color:gold;">👑 Premium</span> – Stratégie et mémoire</p>
+    <button class="locked" disabled data-link="pacman.html">Premium</button>
+  </div>
+</div>
 
 <!-- 🔓 Bouton Stripe Premium -->
 <a href="https://buy.stripe.com/9B6aEZgf863kcwKfKg9EI00" target="_blank">
@@ -237,6 +304,27 @@
     <h3>🐱 Mode Facile</h3>
     <button onclick="location.href='easy.html'">Jouer</button>
   </div>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const isPremium = urlParams.get("premium") === "true";
+
+  document.querySelectorAll(".premium button").forEach(btn => {
+    const link = btn.getAttribute("data-link");
+    if (isPremium) {
+      btn.disabled = false;
+      btn.classList.remove("locked");
+      btn.textContent = "Jouer";
+      btn.style.opacity = "1";
+      btn.onclick = () => window.location.href = link;
+    } else {
+      btn.disabled = true;
+      btn.classList.add("locked");
+      btn.textContent = "Premium";
+      btn.style.opacity = "0.6";
+      btn.onclick = () => alert("🔒 Ce jeu est réservé aux membres Premium (10 $US/an)");
+    }
+  });
+</script>
 
   <!-- Jeux Premium verrouillés -->
   <div class="game-card premium">
