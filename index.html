@@ -1318,3 +1318,42 @@
     </button>
   </a>
 </div>
+const isPremium = true; // ← Mets à false si tu veux verrouiller
+
+function applyPremiumAccess() {
+  const premiumGames = document.querySelectorAll(".premium");
+
+  premiumGames.forEach(card => {
+    const btn = card.querySelector("button");
+    if (isPremium) {
+      btn.disabled = false;
+      btn.style.opacity = "1";
+      btn.textContent = translations[currentLang].play;
+      btn.onclick = () => {
+        const link = btn.getAttribute("data-link");
+        window.location.href = link;
+      };
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = "0.6";
+      btn.textContent = translations[currentLang].premium;
+      btn.onclick = () => alert(translations[currentLang].unlockMessage);
+    }
+  });
+
+  // Mettre à jour le prix affiché
+  document.getElementById("premiumPrice").textContent = "10 $US/an";
+}<p><strong id="premiumPrice">10 $US/an</strong> – Débloquez la version Premium pour accéder à tous les jeux 👑</p>
+<div class="game-card premium">
+  <h3 id="game4">💎 Mode Expert – Gemmes</h3>
+  <button disabled data-link="expert.html">Premium</button>
+</div>
+premium: "Premium",
+unlockMessage: "Débloquez la version Premium pour accéder à ce jeu",
+play: "Jouer"
+window.onload = () => {
+  const lang = localStorage.getItem("lang") || "fr";
+  setLanguage(lang);
+  applyPremiumAccess();
+};
+
