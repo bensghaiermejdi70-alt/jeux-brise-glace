@@ -1376,3 +1376,28 @@
   </script>
 </body>
 </html>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const isPremium = urlParams.get("premium") === "true";
+
+  document.querySelectorAll(".premium button").forEach(btn => {
+    if (isPremium) {
+      btn.classList.remove("locked");
+      btn.disabled = false;
+      btn.textContent = "Jouer";
+      btn.onclick = () => {
+        const link = btn.getAttribute("data-link");
+        window.location.href = link;
+      };
+    } else {
+      btn.classList.add("locked");
+      btn.disabled = true;
+      btn.textContent = "Premium";
+      btn.onclick = () => alert("Débloquez la version Premium pour accéder à ce jeu");
+    }
+  });
+
+  document.getElementById("premiumNotice").textContent = isPremium
+    ? "✅ Version Premium activée – Tous les jeux sont débloqués"
+    : "🔒 Version gratuite – Certains jeux sont verrouillés (10 $US/an)";
+</script>
