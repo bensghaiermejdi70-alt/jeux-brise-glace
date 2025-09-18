@@ -1318,3 +1318,135 @@
     </button>
   </a>
 </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Plateforme Cognitive</title>
+  <style>
+    body { font-family: sans-serif; background: #f4f4f4; text-align: center; margin: 0; padding: 20px; }
+    h1 { font-size: 24px; margin-bottom: 10px; }
+    select { font-size: 16px; padding: 5px; margin-bottom: 20px; }
+    .game-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; max-width: 800px; margin: auto; }
+    .game-card { background: #fff; border-radius: 8px; padding: 15px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .game-card h3 { margin-top: 0; }
+    .game-card button { padding: 8px 16px; font-size: 14px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <select id="lang-select" onchange="setLanguage(this.value)">
+    <option value="fr">🇫🇷 Français</option>
+    <option value="en">🇬🇧 English</option>
+    <option value="ar">🇸🇦 العربية</option>
+    <option value="es">🇪🇸 Español</option>
+    <option value="zh">🇨🇳 中文</option>
+  </select>
+
+  <h1 id="title">🧠 Plateforme Cognitive</h1>
+
+  <div class="game-grid">
+    <div class="game-card"><h3 id="game1">🐱 Mode Facile – Animaux</h3><button onclick="location.href='easy.html'" id="btn1">Jouer</button></div>
+    <div class="game-card"><h3 id="game2">⚽ Mode Classique – Sports</h3><button onclick="location.href='classic.html'" id="btn2">Jouer</button></div>
+    <div class="game-card"><h3 id="game3">🎵 Simon Dit – Séquences</h3><button onclick="location.href='simon.html'" id="btn3">Jouer</button></div>
+    <div class="game-card"><h3 id="game4">💎 Mode Expert – Gemmes</h3><button onclick="location.href='expert.html'" id="btn4">Jouer</button></div>
+    <div class="game-card"><h3 id="game5">⚡ Défi de Rapidité</h3><button onclick="location.href='speed.html'" id="btn5">Jouer</button></div>
+    <div class="game-card"><h3 id="game6">🧠 Mega Memory</h3><button onclick="location.href='mega.html'" id="btn6">Jouer</button></div>
+    <div class="game-card"><h3 id="game7">🌿 Nature Quest</h3><button onclick="location.href='nature.html'" id="btn7">Jouer</button></div>
+    <div class="game-card"><h3 id="game8">🚀 Space Adventure</h3><button onclick="location.href='space.html'" id="btn8">Jouer</button></div>
+    <div class="game-card"><h3 id="game9">👾 Pac-Man Cognitif</h3><button onclick="location.href='pacman.html'" id="btn9">Jouer</button></div>
+  </div>
+
+  <script>
+    const translations = {
+      fr: {
+        pageTitle: "Plateforme Cognitive",
+        title: "🧠 Plateforme Cognitive",
+        game1: "🐱 Mode Facile – Animaux",
+        game2: "⚽ Mode Classique – Sports",
+        game3: "🎵 Simon Dit – Séquences",
+        game4: "💎 Mode Expert – Gemmes",
+        game5: "⚡ Défi de Rapidité",
+        game6: "🧠 Mega Memory",
+        game7: "🌿 Nature Quest",
+        game8: "🚀 Space Adventure",
+        game9: "👾 Pac-Man Cognitif",
+        play: "Jouer"
+      },
+      en: {
+        pageTitle: "Cognitive Platform",
+        title: "🧠 Cognitive Platform",
+        game1: "🐱 Easy Mode – Animals",
+        game2: "⚽ Classic Mode – Sports",
+        game3: "🎵 Simon Says – Sequences",
+        game4: "💎 Expert Mode – Gems",
+        game5: "⚡ Speed Challenge",
+        game6: "🧠 Mega Memory",
+        game7: "🌿 Nature Quest",
+        game8: "🚀 Space Adventure",
+        game9: "👾 Cognitive Pac-Man",
+        play: "Play"
+      },
+      ar: {
+        pageTitle: "المنصة المعرفية",
+        title: "🧠 المنصة المعرفية",
+        game1: "🐱 الوضع السهل – الحيوانات",
+        game2: "⚽ الوضع الكلاسيكي – الرياضة",
+        game3: "🎵 سيمون يقول – التسلسلات",
+        game4: "💎 الوضع الخبير – الجواهر",
+        game5: "⚡ تحدي السرعة",
+        game6: "🧠 الذاكرة الفائقة",
+        game7: "🌿 مغامرة الطبيعة",
+        game8: "🚀 مغامرة الفضاء",
+        game9: "👾 باك مان المعرفي",
+        play: "العب"
+      },
+      es: {
+        pageTitle: "Plataforma Cognitiva",
+        title: "🧠 Plataforma Cognitiva",
+        game1: "🐱 Modo Fácil – Animales",
+        game2: "⚽ Modo Clásico – Deportes",
+        game3: "🎵 Simón Dice – Secuencias",
+        game4: "💎 Modo Experto – Gemas",
+        game5: "⚡ Desafío de Velocidad",
+        game6: "🧠 Mega Memoria",
+        game7: "🌿 Aventura Natural",
+        game8: "🚀 Aventura Espacial",
+        game9: "👾 Pac-Man Cognitivo",
+        play: "Jugar"
+      },
+      zh: {
+        pageTitle: "认知平台",
+        title: "🧠 认知平台",
+        game1: "🐱 简单模式 – 动物",
+        game2: "⚽ 经典模式 – 体育",
+        game3: "🎵 西蒙说 – 序列",
+        game4: "💎 专家模式 – 宝石",
+        game5: "⚡ 速度挑战",
+        game6: "🧠 超级记忆",
+        game7: "🌿 自然探险",
+        game8: "🚀 太空探险",
+        game9: "👾 认知吃豆人",
+        play: "开始"
+      }
+    };
+
+    function setLanguage(lang) {
+      localStorage.setItem("lang", lang);
+      const t = translations[lang];
+      document.title = t.pageTitle;
+      document.getElementById("title").textContent = t.title;
+      for (let i = 1; i <= 9; i++) {
+        document.getElementById("game" + i).textContent = t["game" + i];
+        document.getElementById("btn" + i).textContent = t.play;
+      }
+    }
+
+    window.onload = () => {
+      const lang = localStorage.getItem("lang") || "fr";
+      document.getElementById("lang-select").value = lang;
+      setLanguage(lang);
+    };
+  </script>
+</body>
+</html>
