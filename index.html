@@ -221,6 +221,57 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 min-h-screen">
+<h1>🧠 Bibliothèque de Jeux de Mémoire</h1>
+
+<!-- 🔓 Bouton Stripe Premium -->
+<a href="https://buy.stripe.com/9B6aEZgf863kcwKfKg9EI00" target="_blank">
+  <button style="padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;">
+    🔓 Débloquer Premium – 10 $US/an
+  </button>
+</a>
+
+<!-- 🧠 Grille des jeux -->
+<div class="game-grid">
+  <!-- Jeu gratuit -->
+  <div class="game-card">
+    <h3>🐱 Mode Facile</h3>
+    <button onclick="location.href='easy.html'">Jouer</button>
+  </div>
+
+  <!-- Jeux Premium verrouillés -->
+  <div class="game-card premium">
+    <h3>⚽ Mode Classique <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="classic.html">Premium</button>
+  </div>
+  <div class="game-card premium">
+    <h3>🎵 Simon Says <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="simon.html">Premium</button>
+  </div>
+  <div class="game-card premium">
+    <h3>💎 Mode Expert <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="expert.html">Premium</button>
+  </div>
+  <div class="game-card premium">
+    <h3>⚡ Speed Challenge <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="speed.html">Premium</button>
+  </div>
+  <div class="game-card premium">
+    <h3>🧠 Mega Memory <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="mega.html">Premium</button>
+  </div>
+  <div class="game-card premium">
+    <h3>🌿 Nature Quest <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="nature.html">Premium</button>
+  </div>
+  <div class="game-card premium">
+    <h3>🚀 Space Adventure <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="space.html">Premium</button>
+  </div>
+  <div class="game-card premium">
+    <h3>👾 Pac-Man Cognitif <span style="color:gold;">👑 Premium</span></h3>
+    <button class="locked" disabled data-link="pacman.html">Premium</button>
+  </div>
+</div>
   <p id="premiumNotice">🔒 Version gratuite – Certains jeux sont verrouillés (10 $US/an)</p>
 <a href="https://buy.stripe.com/9B6aEZgf863kcwKfKg9EI00" target="_blank">
   <button style="padding: 10px 20px; font-size: 16px; background-color: gold; border: none; border-radius: 5px; cursor: pointer;">
@@ -246,7 +297,28 @@
                     <!-- Menu déroulant -->
                     <div id="languageMenu" class="absolute top-full right-0 mt-2 bg-black/80 backdrop-blur-sm rounded-lg border border-white/20 shadow-xl z-50 min-w-[160px] hidden">
                         <button onclick="selectLanguage('fr', '🇫🇷', 'Français')" class="language-option w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left border-b border-white/10">
-                            <span class="text-lg">🇫🇷</span>
+      <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const isPremium = urlParams.get("premium") === "true";
+
+  document.querySelectorAll(".premium button").forEach(btn => {
+    const link = btn.getAttribute("data-link");
+    if (isPremium) {
+      btn.disabled = false;
+      btn.classList.remove("locked");
+      btn.textContent = "Jouer";
+      btn.style.opacity = "1";
+      btn.onclick = () => window.location.href = link;
+    } else {
+      btn.disabled = true;
+      btn.classList.add("locked");
+      btn.textContent = "Premium";
+      btn.style.opacity = "0.6";
+      btn.onclick = () => alert("🔒 Ce jeu est réservé aux membres Premium (10 $US/an)");
+    }
+  });
+</script>
+                      <span class="text-lg">🇫🇷</span>
                             <span class="text-sm font-medium text-white">Français</span>
                         </button>
                         <button onclick="selectLanguage('en', '🇺🇸', 'English')" class="language-option w-full flex items-center gap-3 px-4 py-3 hover:bg-white/10 transition-colors text-left border-b border-white/10">
